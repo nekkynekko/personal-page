@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import myIcon from '../../public/favicon_original.png';
+
 const year = new Date().getFullYear();
 ---
 
@@ -6,19 +9,29 @@ const year = new Date().getFullYear();
   <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,182,193,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,182,193,0.15)_1px,transparent_1px)] bg-size-[14px_14px] pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-    <a href="/" class="font-display font-black text-xl text-pink-dark tracking-wider hover:text-pink-main transition-colors flex items-center gap-1 drop-shadow-[1px_1px_0px_rgba(0,0,0,0.1)]">
-      <span class="text-pink-main">★</span> NekkyNekko
-    </a>
+      <!-- <a href="/" class="group flex items-center gap-3 font-display font-black text-2xl text-pink-dark tracking-wider hover:text-pink-main transition-colors drop-shadow-[2px_2px_0px_rgba(0,0,0,0.1)]">
+        <Image
+          src={myIcon}
+          alt="NekkyNekko Logo"
+          class="w-10 h-10 rounded-full border-2 border-pink-dark shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark group-hover:scale-105 transition-transform duration-150 object-cover"
+        />
+        <span>NekkyNekko</span>
+      </a> -->
 
     <div class="flex gap-3 flex-wrap justify-center">
-      <a href="#" class="bg-white/80 text-pink-dark border-2 border-pink-dark font-display font-black text-[11px] uppercase tracking-wider px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-150">
-        Instagram
+      <a
+        href="https://www.instagram.com/nekkynekko"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-white/80 text-pink-dark border-2 border-pink-dark font-display font-black text-[11px] uppercase tracking-wider px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-150">
+            Instagram
       </a>
-      <a href="#" class="bg-white/80 text-pink-dark border-2 border-pink-dark font-display font-black text-[11px] uppercase tracking-wider px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-150">
-        Newsletter
-      </a>
-      <a href="#" class="bg-white/80 text-pink-dark border-2 border-pink-dark font-display font-black text-[11px] uppercase tracking-wider px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-150">
-        RSS
+      <a
+        href="/rss.xml"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-white/80 text-pink-dark border-2 border-pink-dark font-display font-black text-[11px] uppercase tracking-wider px-4 py-2 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-150">
+            RSS
       </a>
     </div>
 

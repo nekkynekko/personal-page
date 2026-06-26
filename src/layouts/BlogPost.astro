@@ -29,6 +29,8 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = As
               height={510}
               src={heroImage}
               alt={heroImageAlt ? heroImageAlt : "Blog Hero Graphic"}
+              loading="eager"
+              fetchpriority="high"
               class="w-full object-cover filter saturate-[1.02] transition-transform duration-700 group-hover:scale-[1.01]"
             />
           </div>
@@ -66,6 +68,7 @@ const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = As
           <div class="
             prose-content
             relative z-10
+            text-justify
             font-body text-sm sm:text-base text-pink-ink leading-relaxed
             [&_h2]:font-display [&_h2]:font-black [&_h2]:text-pink-dark [&_h2]:text-2xl [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:tracking-wide [&_h2]:border-b-2 [&_h2]:border-pink-dark [&_h2]:pb-1
             [&_h3]:font-display [&_h3]:font-black [&_h3]:text-pink-dark [&_h3]:text-xl [&_h3]:mt-10 [&_h3]:mb-3

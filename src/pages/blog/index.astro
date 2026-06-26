@@ -68,7 +68,9 @@ const [featured, ...rest] = posts;
                   width={720}
                   height={405}
                   src={featured.data.heroImage}
-                  alt=""
+                  alt={featured.data.heroImageAlt ? featured.data.heroImageAlt : "Blog Hero Graphic"}
+                  loading="eager"
+                  fetchpriority="high"
                   class="w-full h-full object-cover"
                 />
               ) : (

@@ -35,7 +35,7 @@ const [featured, ...rest] = posts;
             title={featured.data.title}
             excerpt={featured.data.description}
             date={featured.data.pubDate}
-            category="Latest"
+            category="Destacado"
             slug={featured.id}
             heroImage={featured.data.heroImage}
             heroImageAlt={featured.data.heroImageAlt}
@@ -46,7 +46,7 @@ const [featured, ...rest] = posts;
       {rest.length > 0 && (
         <div class="mt-6">
           <p class="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-pink-main mb-4">
-            ✦ latest posts
+            ✦ otros posts
           </p>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

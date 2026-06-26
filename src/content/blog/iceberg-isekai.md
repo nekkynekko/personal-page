@@ -2,7 +2,7 @@
 title: 'El Iceberg del Isekai'
 description: 'Un análisis profundo sobre el éxito del género isekai, la evasión de la realidad y la crítica social oculta tras las historias de reencarnación.'
 pubDate: 'Jun 26 2026'
-heroImage: '../../assets/blog-placeholder-2.jpg'
+heroImage: '../../assets/rezero.jpeg'
 ---
 
 En el vasto mundo del contenido japonés hay un género que parece no tener suficiente: el isekai. Cada temporada me encuentro haciendo scroll entre la lista de nuevos animes, buscando algo que llame mi atención, cuando, sin falta, encuentro al menos un isekai.
