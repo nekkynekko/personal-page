@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  title: string;
+  titleEm?: string;
+  excerpt: string;
+  date: Date;
+  category: string;
+  slug: string;
+  heroImage?: ImageMetadata;
+  heroImageAlt?: string;
+}
+
+const { title, titleEm, excerpt, date, category, slug, heroImage, heroImageAlt } = Astro.props;
+---
+
+<div class="w-full">
+  <div class="w-full border-4 border-pink-dark bg-pink-soft rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark transition-all duration-300 hover:shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] hover:shadow-pink-dark hover:-translate-x-1 hover:-translate-y-1 relative group">
+
+    <div class="h-11 border-b-4 border-pink-dark bg-pink-light/60 flex items-center justify-between px-4 select-none">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-pink-main border-2 border-pink-dark"></div>
+        <div class="w-3 h-3 rounded-full bg-pink-mid border-2 border-pink-dark"></div>
+        <div class="w-3 h-3 rounded-full bg-pink-soft border-2 border-pink-dark"></div>
+      </div>
+      <div class="font-display font-black text-[10px] text-pink-dark uppercase tracking-[0.25em] bg-pink-soft border-2 border-pink-dark px-3 py-0.5 rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
+        ✦ FEATURED
+      </div>
+      <div class="font-display font-bold text-[11px] text-pink-main animate-pulse flex items-center gap-1">
+          <span class="text-[9px]">●</span> <!--  <span class="hidden sm:inline font-mono text-[9px] tracking-widest text-pink-dark/60">LIVE_MUTE</span> -->
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+
+      <div class="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between gap-6 relative bg-linear-to-br from-white/40 to-transparent">
+
+        <div class="absolute right-4 top-4 text-pink-dark/5 text-8xl font-display pointer-events-none select-none group-hover:rotate-12 group-hover:scale-110 transition-transform duration-500">✦</div>
+
+        <div class="relative z-10">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="font-mono text-[10px] font-bold text-pink-soft bg-pink-dark px-2 py-0.5 rounded-md">
+              LN // 01
+            </span>
+            <span class="w-1.5 h-1.5 rounded-full bg-pink-main"></span>
+            <span class="font-body text-[10px] font-black uppercase tracking-widest text-pink-main">
+              editorial spotlight
+            </span>
+          </div>
+
+          <h1 class="font-display font-black text-pink-dark leading-tight mb-4" style="font-size: clamp(1.6rem, 3.5vw, 2.5rem);">
+            {title}
+            {titleEm && (
+              <span class="block text-pink-main bg-pink-light/50 border-2 border-dashed border-pink-main/30 px-3 py-1 rounded-xl mt-2 font-medium italic text-[0.8em] w-fit shadow-sm">
+                {titleEm}
+              </span>
+            )}
+          </h1>
+
+          <p class="font-body text-sm text-pink-ink/90 leading-relaxed max-w-xl line-clamp-3 md:line-clamp-4 border-l-2 border-pink-mid pl-3 my-2">
+            {excerpt}
+          </p>
+        </div>
+
+        <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap pt-4 border-t-2 border-dashed border-pink-light">
+          <div class="flex items-center gap-2 bg-white/60 border-2 border-pink-dark px-3 py-1.5 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
+            <span class="text-[10px]">📅</span>
+            <span class="font-mono text-xs font-bold text-pink-dark">
+              <FormattedDate date={date} />
+            </span>
+          </div>
+
+          <a
+            href={`/blog/${slug}`}
+            class="inline-flex items-center gap-3 bg-pink-main text-pink-soft border-2 border-pink-dark font-display font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-dark hover:text-pink-soft hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-pink-dark hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-150"
+          >
+            Access Record
+            <span class="font-sans font-bold transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 border-t-4 lg:border-t-0 lg:border-l-4 border-pink-dark bg-pink-light/30 relative min-h-65 lg:min-h-full flex items-center justify-center overflow-hidden p-4 select-none">
+
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,182,193,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,182,193,0.15)_1px,transparent_1px)] bg-size-[14px_14px]"></div>
+
+        <div class="w-full h-full rounded-2xl overflow-hidden border-2 border-pink-dark shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark bg-pink-dark/10 relative group-hover:rotate-1 group-hover:scale-[1.01] transition-transform duration-500 ease-out">
+          {heroImage ? (
+            <Image
+              src={heroImage}
+              alt={heroImageAlt || title}
+              width={720}
+              height={540}
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter saturate-[1.05]"
+            />
+          ) : (
+            <div class="w-full h-full bg-linear-to-tr from-pink-dark/30 to-pink-light/20 flex flex-col items-center justify-center text-pink-dark/30 gap-2">
+              <span class="text-5xl font-display group-hover:animate-spin [animation-duration:8s]">✿</span>
+              <span class="text-[9px] font-mono font-bold tracking-widest uppercase opacity-75 bg-white/40 px-2 py-0.5 border border-pink-dark/20 rounded">img_null</span>
+            </div>
+          )}
+        </div>
+
+        <span class="absolute bottom-6 right-6 bg-pink-light text-pink-dark border-2 border-pink-dark font-display font-black text-[10px] uppercase tracking-widest px-4 py-2 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark -rotate-3 group-hover:rotate-3 group-hover:scale-105 transition-all duration-300">
+          📂 {category}
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>

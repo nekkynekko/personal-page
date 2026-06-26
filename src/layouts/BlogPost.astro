@@ -5,82 +5,101 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import '../styles/global.css';
 
 type Props = CollectionEntry<'blog'>['data'];
-
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt } = Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
+  <body class="bg-pink-page font-body min-h-screen text-pink-ink selection:bg-pink-main selection:text-pink-soft">
+
+    <Header />
+
+    <main class="w-full max-w-7xl mx-auto px-4 md:px-8 py-10">
+      <article>
+        {heroImage && (
+          <div class="w-full max-w-4xl mx-auto mb-10 border-4 border-pink-dark rounded-2xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark bg-pink-light/20 relative group select-none">
+            <Image
+              width={1020}
+              height={510}
+              src={heroImage}
+              alt={heroImageAlt ? heroImageAlt : "Blog Hero Graphic"}
+              class="w-full object-cover filter saturate-[1.02] transition-transform duration-700 group-hover:scale-[1.01]"
+            />
+          </div>
+        )}
+
+        <div class="w-full max-w-4xl mx-auto bg-pink-soft border-4 border-pink-dark rounded-2xl px-5 sm:px-8 md:px-14 py-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark relative overflow-hidden">
+
+          <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(201,59,107,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(201,59,107,0.04)_1px,transparent_1px)] bg-size-[16px_16px] pointer-events-none"></div>
+
+          <header class="text-center mb-12 pb-10 border-b-4 border-dashed border-pink-dark/30 relative z-10">
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-6 select-none">
+              <span class="bg-pink-light text-pink-dark border-2 border-pink-dark font-mono text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
+                pub// <FormattedDate date={pubDate} />
+              </span>
+              {updatedDate && (
+                <span class="bg-white text-pink-dark border-2 border-dashed border-pink-dark font-mono text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded">
+                  mod// <FormattedDate date={updatedDate} />
+                </span>
+              )}
+            </div>
+
+            <h1 class="font-display font-black text-pink-dark leading-tight mb-6 tracking-wide drop-shadow-[2px_2px_0px_rgba(255,255,255,1)]" style="font-size: clamp(2rem, 5vw, 3.5rem);">
+              {title}
+            </h1>
+
+            {description && (
+              <div class="border-2 border-pink-dark bg-white/70 rounded-xl p-4 max-w-2xl mx-auto text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
+                <p class="font-body text-xs md:text-sm text-pink-dark font-medium leading-relaxed italic">
+                  <span class="text-pink-main font-mono not-italic mr-1">◆</span> {description}
+                </p>
+              </div>
+            )}
+          </header>
+
+          <div class="
+            prose-content
+            relative z-10
+            font-body text-sm sm:text-base text-pink-ink leading-relaxed
+            [&_h2]:font-display [&_h2]:font-black [&_h2]:text-pink-dark [&_h2]:text-2xl [&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:tracking-wide [&_h2]:border-b-2 [&_h2]:border-pink-dark [&_h2]:pb-1
+            [&_h3]:font-display [&_h3]:font-black [&_h3]:text-pink-dark [&_h3]:text-xl [&_h3]:mt-10 [&_h3]:mb-3
+            [&_p]:mb-6 [&_p]:leading-[1.85]
+            [&_a]:text-pink-dark [&_a]:font-black [&_a]:underline [&_a]:decoration-pink-main [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a]:bg-pink-light/30 [&_a]:px-1 [&_a]:rounded-md [&_a:hover]:bg-pink-main [&_a:hover]:text-white [&_a:hover]:decoration-transparent [&_a]:transition-colors
+            [&_strong]:text-pink-dark [&_strong]:font-black [&_strong]:bg-pink-light/20 [&_strong]:px-0.5
+            [&_em]:text-pink-main [&_em]:italic [&_em]:font-medium
+            [&_blockquote]:border-2 [&_blockquote]:border-pink-dark [&_blockquote]:bg-white [&_blockquote]:rounded-xl [&_blockquote]:p-5 [&_blockquote]:my-8 [&_blockquote]:text-pink-dark [&_blockquote]:italic [&_blockquote]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] [&_blockquote]:shadow-pink-dark [&_blockquote]:bg-[linear-gradient(to_right,rgba(201,59,107,0.03)_1px,transparent_1px)] [&_blockquote]:bg-size-[12px_1px]
+            [&_ul]:list-none [&_ul]:pl-0 [&_ul]:mb-6 [&_ul]:space-y-2.5
+            [&_ul_li]:pl-6 [&_ul_li]:relative [&_ul_li]:before:content-['✿'] [&_ul_li]:before:absolute [&_ul_li]:before:left-0 [&_ul_li]:before:text-pink-main [&_ul_li]:before:text-[11px] [&_ul_li]:before:top-0.5
+            [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6 [&_ol]:space-y-2.5 [&_ol_li]:pl-1 [&_ol_li]:font-bold [&_ol_li]:text-pink-dark [&_ol_li_span]:font-normal [&_ol_li_span]:text-pink-ink
+            [&_img]:border-2 [&_img]:border-pink-dark [&_img]:rounded-xl [&_img]:w-full [&_img]:my-8 [&_img]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] [&_img]:shadow-pink-dark
+            [&_code]:bg-white [&_code]:border [&_code]:border-pink-dark/30 [&_code]:text-pink-dark [&_code]:text-[13px] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-lg [&_code]:font-mono [&_code]:font-bold [&_code]:shadow-[1px_1px_0px_rgba(0,0,0,1)]
+            [&_pre]:bg-pink-dark [&_pre]:border-2 [&_pre]:border-pink-dark [&_pre]:text-pink-soft [&_pre]:rounded-xl [&_pre]:p-5 [&_pre]:my-8 [&_pre]:overflow-x-auto [&_pre]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] [&_pre]:shadow-pink-dark
+            [&_pre_code]:bg-transparent [&_pre_code]:text-pink-soft [&_pre_code]:p-0 [&_pre_code]:border-none [&_pre_code]:shadow-none [&_pre_code]:text-xs
+            [&_hr]:border-t-4 [&_hr]:border-dashed [&_hr]:border-pink-dark/30 [&_hr]:my-10
+          ">
+            <slot />
+          </div>
+
+          <div class="mt-14 pt-8 border-t-4 border-dashed border-pink-dark/30 relative z-10 select-none">
+            <a
+              href="/"
+              class="inline-flex items-center gap-2 bg-pink-main text-pink-soft border-2 border-pink-dark font-display font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark hover:bg-pink-dark hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-150"
+            >
+              ← Return
+            </a>
+          </div>
+
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+
+  </body>
 </html>

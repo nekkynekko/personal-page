@@ -5,110 +5,125 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import Marquee from '../../components/Marquee.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import '../../styles/global.css';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const [featured, ...rest] = posts;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="bg-pink-page font-body min-h-screen">
+
+    <Header />
+    <Marquee />
+
+    <main class="w-full px-4 md:px-8 py-8 flex flex-col gap-8">
+
+        {featured && (
+          <a
+            href={`/blog/${featured.id}/`}
+            class="group w-full bg-pink-main rounded-4xl p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center hover:bg-pink-dark transition-colors duration-200"
+          >
+            <div>
+              <span class="inline-flex items-center gap-2 bg-pink-soft/20 border border-pink-soft/40 text-pink-soft text-[11px] font-semibold uppercase tracking-[0.15em] px-4 py-1.5 rounded-full mb-4">
+                ✦ Latest post
+              </span>
+
+              <h2
+                class="font-display font-black text-pink-soft leading-tight mb-3"
+                style="font-size: clamp(1.5rem, 3vw, 2.25rem);"
+              >
+                {featured.data.title}
+              </h2>
+
+              {featured.data.description && (
+                <p class="font-body text-sm text-pink-soft/80 leading-relaxed mb-5">
+                  {featured.data.description}
+                </p>
+              )}
+
+              <div class="flex items-center gap-4 flex-wrap">
+                <span class="font-body text-xs text-pink-soft/60">
+                  <FormattedDate date={featured.data.pubDate} />
+                </span>
+
+                <span class="bg-pink-soft text-pink-dark font-body text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full group-hover:bg-pink-light transition-colors">
+                  Read post →
+                </span>
+              </div>
+            </div>
+
+            <div class="bg-pink-dark/40 rounded-3xl overflow-hidden aspect-video">
+              {featured.data.heroImage ? (
+                <Image
+                  width={720}
+                  height={405}
+                  src={featured.data.heroImage}
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center text-6xl opacity-30">
+                  🌸
+                </div>
+              )}
+            </div>
+          </a>
+        )}
+
+      {rest.length > 0 && (
+        <div>
+          <p class="font-body text-[10px] font-bold uppercase tracking-[0.2em] text-pink-main mb-5">✦ all posts</p>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 list-none p-0 m-0">
+            {rest.map(post => (
+              <li>
+               <a
+                  href={`/blog/${post.id}/`}
+                  class="group flex flex-col bg-pink-soft rounded-3xl p-5 border-2 border-transparent hover:border-pink-light hover:shadow-[0_12px_32px_rgba(201,59,107,0.18)] hover:-translate-y-1 transition-all duration-200 h-full"
+                >
+                  <div class="rounded-2xl overflow-hidden aspect-video mb-4 bg-pink-mid">
+                    {post.data.heroImage
+                      ? <Image width={720} height={360} src={post.data.heroImage} alt="" class="w-full h-full object-cover" />
+                      : <div class="w-full h-full flex items-center justify-center text-4xl opacity-50">🌸</div>
+                    }
+                  </div>
+
+                  <span class="font-body text-[10px] font-bold uppercase tracking-widest text-pink-main/60 mb-2">
+                    <FormattedDate date={post.data.pubDate} />
+                  </span>
+
+                  <h2 class="font-display font-bold text-pink-dark text-lg leading-snug mb-2 grow">
+                    {post.data.title}
+                  </h2>
+
+                  {post.data.description && (
+                    <p class="font-body text-xs text-pink-main leading-relaxed mb-4">
+                      {post.data.description}
+                    </p>
+                  )}
+
+                  <span class="self-start bg-pink-main text-pink-soft font-body text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full group-hover:bg-pink-dark transition-colors mt-auto">
+                    Read →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+    </main>
+
+    <Footer />
+
+  </body>
 </html>
