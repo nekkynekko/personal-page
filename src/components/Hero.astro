@@ -26,21 +26,18 @@ const { title, titleEm, excerpt, date, category, slug, heroImage, heroImageAlt }
         <div class="w-3 h-3 rounded-full bg-pink-mid border-2 border-pink-dark"></div>
         <div class="w-3 h-3 rounded-full bg-pink-soft border-2 border-pink-dark"></div>
       </div>
-      <!-- <div class="font-display font-black text-[10px] text-pink-dark uppercase tracking-[0.25em] bg-pink-soft border-2 border-pink-dark px-3 py-0.5 rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
-        ✦ FEATURED
-      </div> -->
       <div class="font-display font-bold text-[11px] text-pink-main animate-pulse flex items-center gap-1">
-          <span class="text-[9px]">●</span> <!--  <span class="hidden sm:inline font-mono text-[9px] tracking-widest text-pink-dark/60">LIVE_MUTE</span> -->
+          <span class="text-[9px]">●</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+    <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch lg:h-110">
 
-      <div class="lg:col-span-7 p-6 md:p-8 flex flex-col justify-between gap-6 relative bg-linear-to-br from-white/40 to-transparent">
+      <div class="lg:col-span-7 h-full p-6 lg:p-8 flex flex-col justify-between relative bg-linear-to-br from-white/40 to-transparent">
 
         <div class="absolute right-4 top-4 text-pink-dark/5 text-8xl font-display pointer-events-none select-none group-hover:rotate-12 group-hover:scale-110 transition-transform duration-500">✦</div>
 
-        <div class="relative z-10">
+        <div class="relative z-10 flex-1 flex flex-col justify-center">
           <div class="flex items-center gap-2 mb-4">
             <span class="font-mono text-[10px] font-bold text-pink-soft bg-pink-dark px-2 py-0.5 rounded-md">
               Último Post
@@ -51,21 +48,21 @@ const { title, titleEm, excerpt, date, category, slug, heroImage, heroImageAlt }
             </span>
           </div>
 
-          <h1 class="font-display font-black text-pink-dark leading-tight mb-4" style="font-size: clamp(1.6rem, 3.5vw, 2.5rem);">
+          <h1 class="font-display font-black text-pink-dark text-2xl md:text-3xl lg:text-[2rem] leading-tight mb-3 line-clamp-2">
             {title}
             {titleEm && (
-              <span class="block text-pink-main bg-pink-light/50 border-2 border-dashed border-pink-main/30 px-3 py-1 rounded-xl mt-2 font-medium italic text-[0.8em] w-fit shadow-sm">
+              <span class="inline-block text-pink-main bg-pink-light/50 border-2 border-dashed border-pink-main/30 px-3 py-0.5 rounded-xl mt-1.5 font-medium italic text-lg shadow-sm">
                 {titleEm}
               </span>
             )}
           </h1>
 
-          <p class="font-body text-sm text-pink-ink/90 leading-relaxed max-w-xl line-clamp-3 md:line-clamp-4 border-l-2 border-pink-mid pl-3 my-2">
+          <p class="font-body text-sm text-pink-ink/90 leading-relaxed max-w-xl line-clamp-2 border-l-2 border-pink-mid pl-3 my-2">
             {excerpt}
           </p>
         </div>
 
-        <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap pt-4 border-t-2 border-dashed border-pink-light">
+        <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap pt-4 border-t-2 border-dashed border-pink-light shrink-0">
           <div class="flex items-center gap-2 bg-white/60 border-2 border-pink-dark px-3 py-1.5 rounded-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] shadow-pink-dark">
             <span class="text-[10px]">📅</span>
             <span class="font-mono text-xs font-bold text-pink-dark">
@@ -83,7 +80,7 @@ const { title, titleEm, excerpt, date, category, slug, heroImage, heroImageAlt }
         </div>
       </div>
 
-      <div class="lg:col-span-5 border-t-4 lg:border-t-0 lg:border-l-4 border-pink-dark bg-pink-light/30 relative min-h-65 lg:min-h-full flex items-center justify-center overflow-hidden p-4 select-none">
+      <div class="lg:col-span-5 border-t-4 lg:border-t-0 lg:border-l-4 border-pink-dark bg-pink-light/30 relative h-64 lg:h-full flex items-center justify-center overflow-hidden p-4 select-none">
 
         <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,182,193,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,182,193,0.15)_1px,transparent_1px)] bg-size-[14px_14px]"></div>
 
